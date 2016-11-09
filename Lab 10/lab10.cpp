@@ -41,9 +41,6 @@ int main()
   int localFirst,
       localSecond,
       localThird;
-  ifstream pop;
-  pop.open("population.csv");
-
   string localname;
   int locnumCountry = 0;
   long double locpop1950;
@@ -51,6 +48,8 @@ int main()
   long double locpop1990;
   long double locpop2010;
   long double locpop2015;
+  ifstream pop;
+  pop.open("population.csv");
 
   if (pop.fail())
    {
