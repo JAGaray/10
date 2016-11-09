@@ -12,6 +12,8 @@ This program is designed to open a file, read the data in the file, and use it t
 
 using namespace std;
 
+const int MAXCOUNTRIES = 500;
+
 struct Country
 {
   string name;
