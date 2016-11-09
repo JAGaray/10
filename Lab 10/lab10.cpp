@@ -11,6 +11,8 @@ This program is designed to open a file, read the data in the file, and use it t
 #include <fstream>
 #include "lab10.h"
 
+using namespace std;
+
 struct Country
 {
   string name;
