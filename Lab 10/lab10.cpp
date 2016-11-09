@@ -9,6 +9,8 @@ This program is designed to open a file, read the data in the file, and use it t
 
 #include <iostream> 
 #include <fstream>
+#include <cmath>
+#include <iomanip>
 
 using namespace std;
 
