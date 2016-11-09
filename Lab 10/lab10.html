@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>CSCI 136 Lab 10</title>
+    <meta content="Subash Shankar" name="author">
+  </head>
+  <body>
+    <h1 align="center">Lab 10 - Data<br>
+    </h1>
+    <h3>Due: end of class</h3>
+    <h3>OVERVIEW<br>
+    </h3>
+    For this lab, you will do some basic manipulations of data. For
+    this, you will need to do some File I/O and use structs (along with
+    other data structures already covered in other labs). <br>
+    <ul>
+    </ul>
+    <h3>TASKS <br>
+    </h3>
+    The goal here is to keep track of population information about the
+    countries of the world. <br>
+    <br>
+    <h5>Task 0:</h5>
+    First, we need to decide the appropriate data structure for storing
+    the data. Your instructor has supplied you with a file
+    (populations.csv), which is a simplified version of data sourced
+    from the <a
+href="http://esa.un.org/unpd/wpp/DVD/Files/1_Indicators%20%28Standard%29/EXCEL_FILES/1_Population/WPP2015_POP_F01_1_TOTAL_POPULATION_BOTH_SEXES.XLS">UN</a>
+    (a few countries with non-ASCII characters in their name were left
+    out just in case your program has problems with those). Save the
+    file to $PWD. <br>
+    <br>
+    The format of the file is as follows:<br>
+    <ul>
+      <li>Columns 1-5: populations (in 1000s) of country in 1950, 1970,
+        1990, 2010, 2015, respectively. Since the population is in
+        1000s, the number is a real number. <br>
+      </li>
+      <li>Column 6: Name of country. <br>
+      </li>
+    </ul>
+    <ul>
+    </ul>
+    <p>Thus, a suitable data structure might be:<br>
+      <tt>&nbsp; struct Country {</tt><br>
+      <tt>&nbsp;&nbsp;&nbsp; string name;</tt><br>
+      <tt>&nbsp;&nbsp;&nbsp; double pop1950;</tt><br>
+      <tt>&nbsp;&nbsp;&nbsp; double pop1970;</tt><br>
+      <tt>&nbsp;&nbsp;&nbsp; double pop1990;<br>
+        &nbsp;&nbsp;&nbsp; double pop2010;<br>
+        &nbsp;&nbsp;&nbsp; double pop2015<br>
+        &nbsp; };</tt><br>
+      <tt>&nbsp; struct World {</tt><br>
+      <tt>&nbsp;&nbsp;&nbsp; int&nbsp;&nbsp;&nbsp;&nbsp; numCountries;</tt><br>
+      <tt>&nbsp;&nbsp;&nbsp; Country countries[MAXCOUNTRIES];</tt><br>
+      <tt>&nbsp; } myWorld;</tt><br>
+    </p>
+    You will change this data structure later.<br>
+    <h5>Task 0: </h5>
+    Write a function to initialize myWorld to data read from the
+    supplied data file. There are a few complications:<br>
+    <ul>
+      <li>Reading the populations is straightforward, and can be done
+        using the standard file IO functions we covered in class (i.e.,
+        "&gt;&gt;" using an input stream). However, since the names of
+        some countries contain spaces, we need to use getline instead of
+        &gt;&gt; for the name field. Fortunately, the country is the
+        final field so we can use "&gt;&gt;" to read the populations and
+        then a getline to finish the line.<br>
+      </li>
+      <li>You will need to input data until the end of file is reached.
+        Recall that getline's return value is false if at end of file,
+        so its easy to check for this. <br>
+      </li>
+    </ul>
+    <p>To check that you did this correctly, you may wish to use ddd to
+      check the value of myWorld. <br>
+    </p>
+    <h5>Task 1:</h5>
+    Write a program that prints the countries with the 3 largest growth
+    rates between 1950 and 2015. Also modify the World data structure to
+    store the indices of these 3 countries so that the searching can be
+    avoided in the future. One algorithm to do this is a 3 pass
+    algorithm; a better algorithm might be to keep track of the 'top 3'
+    and adjust these as you iterate through the data structure. Print
+    out the results in the following format:<br>
+    <blockquote><tt>The fastest growing country is XXXXX, which grew by
+        XXXXX% between 1950 and 2015.</tt><br>
+      <tt>The 2nd fastest growing country is XXXXX, which grew by XXXXX%
+        between 1950 and 2015.</tt><tt><br>
+      </tt><tt>The 3rd fastest growing country is XXXXX, which grew by
+        XXXXX% between 1950 and 2015.</tt><br>
+    </blockquote>
+    You may assume the precondition that there are at least 3 countries.
+    <br>
+    <h5>Task 2:</h5>
+    Now we wish to find countries that had negative growth rates. Print
+    the list of such countries in the following format:<br>
+    <blockquote><tt>The following countries shrunk between 1950 and
+        2015:<br>
+        country 1<br>
+        ...<br>
+        country n<br>
+      </tt></blockquote>
+    To do this efficiently, recall that you had computed the growth
+    rates of all countries in the previous task. So, you should first
+    modify the Country datatype to store the growth rate, and modify the
+    previous code to save the computed growth rates of each country.
+    Then, this task becomes simple (while staying efficient).<br>
+    <p> </p>
+    <h3>HAND IN</h3>
+    <p>For full credit on this lab you should spread your program across
+      multiple files, and also write a makefile. One suitable
+      partitioning might be to put the structure definitions in a header
+      file, the input routines in one file, and the task1 and task2 code
+      in 2 files. <br>
+    </p>
+    <p>Your 136 instructor will tell you what to hand in and how.<br>
+    </p>
+    <h3>GENERAL COMMENTS FOR ALL PROGRAMS THIS SEMESTER </h3>
+    <p>You should have the following header on all programs:<br>
+    </p>
+    <blockquote><font size="+1"><tt>/*<br>
+          &nbsp; Author: &lt;name&gt;<br>
+          &nbsp; Course: {135,136}<br>
+          &nbsp; Instructor: &lt;name&gt;<br>
+          &nbsp; Assignment: &lt;title, e.g., "Lab 1"&gt;<br>
+          <br>
+          &nbsp; This program does ...<br>
+          */<br>
+        </tt></font></blockquote>
+    <h3> </h3>
+    <h3>GRADING</h3>
+    <p>All 135 and 136 programs this semester will be graded on: </p>
+    <ul>
+      <li> Correctness: Does your program work? <br>
+      </li>
+      <li>Testing: Have you generated sufficient and good test data to
+        give reasonable confidence that your program works?</li>
+      <li>Structure: Have you structured your code to follow proper
+        software engineering guidelines? This includes readability and
+        maintainability.</li>
+      <li>Documentation: How well documented is your code? Good
+        documentation does not repeat the code in English, but explains
+        the point of each code block, highlighting any design decisions
+        and/or tricky implementation details. </li>
+    </ul>
+    <p><br>
+    </p>
+  </body>
+</html>
