@@ -2,12 +2,11 @@
    Course: CSCI 136
    Task: Lab 10
    Instructor: Ali
-
 This program is designed to open a file, read the data in the file, and use it to populate data structures. */
 
 
 
-#include <iostream> 
+#include <iostream>
 #include <fstream>
 #include <cmath>
 #include <iomanip>
@@ -36,36 +35,6 @@ struct World
   int first, second, third;
 } myWorld;
 
-void initializeWorld(World& myWorld, ifstream& pop)
-{
- 
-  string localname;
-  int locnumCountry = 0;
-  long double locpop1950;
-  long double locpop1970;
-  long double locpop1990;
-  long double locpop2010;
-  long double locpop2015;
-
-
-	while (pop >> locpop1950 >> locpop1970 >> locpop1990 >> 
-		locpop2010 >> locpop2015)	 
-	 {
-		if (!pop.eofP())
-		 {
-			getline(pop, localname);
-		 }
-		myWorld.countries[locnumCountry].pop1950 = locpop1950;
-		myWorld.countries[locnumCountry].pop1970 = locpop1970;
-		myWorld.countries[locnumCountry].pop1990 = locpop1990;
-		myWorld.countries[locnumCountry].pop2010 = locpop2010;
-		myWorld.countries[locnumCountry].pop2015 = locpop2015;
-	  
-	  locnumCountry++;
-	}
-	
-	myWorld.numCountries = locnumCountry;
-}
 
 int main()
 {
@@ -75,12 +44,36 @@ int main()
   ifstream pop;
   pop.open("population.csv");
 
+  string localname;
+  int locnumCountry = 0;
+  long double locpop1950;
+  long double locpop1970;
+  long double locpop1990;
+  long double locpop2010;
+  long double locpop2015;
+
   if (pop.fail())
    {
 	cout << "Error opening file\n";
    }
- 
-initializeWorld (myWorld, pop);
+
+	while (pop >> locpop1950 >> locpop1970 >> locpop1990 >>
+		locpop2010 >> locpop2015 >> localname)
+	 {
+		if (!pop.eof())
+		 {
+			getline(pop, localname);
+		 }
+		myWorld.countries[locnumCountry].pop1950 = locpop1950;
+		myWorld.countries[locnumCountry].pop1970 = locpop1970;
+		myWorld.countries[locnumCountry].pop1990 = locpop1990;
+		myWorld.countries[locnumCountry].pop2010 = locpop2010;
+		myWorld.countries[locnumCountry].pop2015 = locpop2015;
+
+	  locnumCountry++;
+	}
+
+	myWorld.numCountries = locnumCountry;
 
   for (int i=0; i < myWorld.numCountries; i++)
    {
@@ -92,13 +85,13 @@ initializeWorld (myWorld, pop);
 	  localFirst = i;
 	}
      if ((myWorld.countries[localFirst].growth1950to2015 > myWorld.countries[i].growth1950to2015)
-	 && (myWorld.countries[localSecond].growth1950to2015 < 
+	 && (myWorld.countries[localSecond].growth1950to2015 <
 	     myWorld.countries[i].growth1950to2015))
 	{
 	  localSecond = i;
 	}
-     if ((myWorld.countries[localSecond].growth1950to2015 > myWorld.countries[i].growth1950to2015)  && 
-	 (myWorld.countries[localThird].growth1950to2015 < 
+     if ((myWorld.countries[localSecond].growth1950to2015 > myWorld.countries[i].growth1950to2015)  &&
+	 (myWorld.countries[localThird].growth1950to2015 <
 	 myWorld.countries[i].growth1950to2015))
 	{
 	  localThird = i;
@@ -112,6 +105,6 @@ initializeWorld (myWorld, pop);
        << myWorld.countries[localFirst].growth1950to2015 << " from 1950 to 2015." << endl;
 
   cout << "The country with the second highest growth rate is " << myWorld.countries[localSecond].name << ", which had a rate of " << myWorld.countries[localSecond].growth1950to2015 << " from 1950 to 2015." << endl;
-  
-  cout << "The country with the third highest growth rate is " << myWorld.countries[localThird].name <<  ", which had a rate of" << myWorld.countries[localThird].growth1950to2015 << " from 1950 to 2015." << endl; 
+
+  cout << "The country with the third highest growth rate is " << myWorld.countries[localThird].name <<  ", which had a rate of" << myWorld.countries[localThird].growth1950to2015 << " from 1950 to 2015." << endl;
 }
