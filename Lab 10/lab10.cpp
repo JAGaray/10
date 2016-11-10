@@ -10,12 +10,13 @@ This program is designed to open a file, read the data in the file, and use it t
 #include <fstream>
 #include <cmath>
 #include <iomanip>
+#include "h.h"
 
 using namespace std;
 
 const int MAXCOUNTRIES = 500;
-
 struct Country
+
 {
   string name;
   double pop1950;
@@ -38,9 +39,12 @@ struct World
 
 int main()
 {
-  int localFirst,
-      localSecond,
-      localThird;
+  int localFirst = 0,
+      localSecond = 0,
+      localThird = 0;
+  ifstream pop;
+  pop.open("population.csv");
+
   string localname;
   int locnumCountry = 0;
   long double locpop1950;
@@ -48,8 +52,6 @@ int main()
   long double locpop1990;
   long double locpop2010;
   long double locpop2015;
-  ifstream pop;
-  pop.open("population.csv");
 
   if (pop.fail())
    {
@@ -57,7 +59,7 @@ int main()
    }
 
 	while (pop >> locpop1950 >> locpop1970 >> locpop1990 >>
-		locpop2010 >> locpop2015 >> localname)
+		locpop2010 >> locpop2015)
 	 {
 		if (!pop.eof())
 		 {
@@ -68,7 +70,7 @@ int main()
 		myWorld.countries[locnumCountry].pop1990 = locpop1990;
 		myWorld.countries[locnumCountry].pop2010 = locpop2010;
 		myWorld.countries[locnumCountry].pop2015 = locpop2015;
-
+        myWorld.countries[locnumCountry].name = localname;
 	  locnumCountry++;
 	}
 
@@ -79,7 +81,7 @@ int main()
 	myWorld.countries[i].growth1950to2015 = abs( ((myWorld.countries[i].pop2015 - myWorld.countries[i].pop1950) /
 						      myWorld.countries[i].pop1950) * 100);
 
-     if (myWorld.countries[i].growth1950to2015 > myWorld.countries[localFirst].growth1950to2015)
+    if (myWorld.countries[i].growth1950to2015 > myWorld.countries[localFirst].growth1950to2015)
 	{
 	  localFirst = i;
 	}
@@ -100,10 +102,10 @@ int main()
 
   cout << fixed << setprecision(0); //formatting
 
-  cout << "The country with the highest growth rate is " << myWorld.countries[localFirst].name << ", which had a rate of "
+  cout << "The country with the highest growth rate is" << myWorld.countries[localFirst].name << ", which had a rate of "
        << myWorld.countries[localFirst].growth1950to2015 << " from 1950 to 2015." << endl;
 
-  cout << "The country with the second highest growth rate is " << myWorld.countries[localSecond].name << ", which had a rate of " << myWorld.countries[localSecond].growth1950to2015 << " from 1950 to 2015." << endl;
+  cout << "The country with the second highest growth rate is" << myWorld.countries[localSecond].name << ", which had a rate of " << myWorld.countries[localSecond].growth1950to2015 << " from 1950 to 2015." << endl;
 
-  cout << "The country with the third highest growth rate is " << myWorld.countries[localThird].name <<  ", which had a rate of" << myWorld.countries[localThird].growth1950to2015 << " from 1950 to 2015." << endl;
+  cout << "The country with the third highest growth rate is" << myWorld.countries[localThird].name <<  ", which had a rate of " << myWorld.countries[localThird].growth1950to2015 << " from 1950 to 2015." << endl;
 }
