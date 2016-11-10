@@ -30,29 +30,13 @@ int main()
   long double locpop1990;
   long double locpop2010;
   long double locpop2015;
+  World myWorld;
 
   if (pop.fail())
    {
 	cout << "Error opening file\n";
    }
-
-	while (pop >> locpop1950 >> locpop1970 >> locpop1990 >>
-		locpop2010 >> locpop2015)
-	 {
-		if (!pop.eof())
-		 {
-			getline(pop, localname);
-		 }
-		myWorld.countries[locnumCountry].pop1950 = locpop1950;
-		myWorld.countries[locnumCountry].pop1970 = locpop1970;
-		myWorld.countries[locnumCountry].pop1990 = locpop1990;
-		myWorld.countries[locnumCountry].pop2010 = locpop2010;
-		myWorld.countries[locnumCountry].pop2015 = locpop2015;
-        myWorld.countries[locnumCountry].name = localname;
-	  locnumCountry++;
-	}
-
-	myWorld.numCountries = locnumCountry;
+   initializeWorld(myWorld, pop);
 
   for (int i=0; i < myWorld.numCountries; i++)
    {
