@@ -23,7 +23,10 @@ struct World {
 	Country countries[MAX_COUNTRIES];
 	// indices of 3 largest countries
 	int first, second, third;
-}; 
+};
+
+
+extern initializeWorld(World& myWorld, std::ifstream& pop);
 
 #endif
 
