@@ -14,29 +14,6 @@ This program is designed to open a file, read the data in the file, and use it t
 
 using namespace std;
 
-const int MAXCOUNTRIES = 500;
-struct Country
-
-{
-  string name;
-  double pop1950;
-  double pop1970;
-  double pop1990;
-  double pop2010;
-  double pop2015;
-
-  long double growth1950to2015;
-
-};
-
-struct World
-{
-  int numCountries;
-  Country countries[MAXCOUNTRIES];
-  int first, second, third;
-} myWorld;
-
-
 int main()
 {
   int localFirst = 0,
