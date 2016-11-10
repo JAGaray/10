@@ -10,7 +10,7 @@ This program is designed to open a file, read the data in the file, and use it t
 #include <fstream>
 #include <cmath>
 #include <iomanip>
-#include "h.h"
+#include "lab10.h"
 
 using namespace std;
 
