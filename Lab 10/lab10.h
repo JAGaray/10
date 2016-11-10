@@ -23,4 +23,4 @@ struct World {
 	Country countries[MAX_COUNTRIES];
 	// indices of 3 largest countries
 	int first, second, third;
-}; myWorld; // myWorld is an instance of World
+};
