@@ -1,3 +1,6 @@
+#ifndef LAB_10_H
+#define LAB_10_H
+
 const int MAX_COUNTRIES = 500;
 
 // structure and class definitions
@@ -11,10 +14,7 @@ struct Country {
 	long double pop2015;
 
 	// store growth rates for each country
-	long double growth1950to1970;
-	long double growth1970to1990;
-	long double growth1990to2010;
-	long double growth2010to2015;
+	long double growth1950to2015;
 
 };
 
@@ -23,4 +23,7 @@ struct World {
 	Country countries[MAX_COUNTRIES];
 	// indices of 3 largest countries
 	int first, second, third;
-};
+}; myWorld // myWorld is an instance of World
+
+#endif
+
